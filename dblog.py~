@@ -1,0 +1,25 @@
+"""
+Handles logging information to MongoDB.
+"""
+
+from pymongo import MongoClient
+from pymongo import ASCENDING
+import datetime
+import config
+
+
+client = MongoClient()
+db = client.netstatus_logs
+log_collection = db.log
+log_collection.ensure_index([("timestamp", ASCENDING)])  
+
+
+def DBlog(msg):
+    """Log `msg` to MongoDB log"""
+    entry = {}
+    entry['time stamp'] = datetime.datetime.utcnow()
+    entry['msg'] = msg
+    db.netstatus_logs.insert(entry)
+    print 'Message ( %s ) logged!' %msg
+
+#DBlog('Log messages like this')
