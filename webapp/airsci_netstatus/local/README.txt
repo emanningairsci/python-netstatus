@@ -1,1 +1,0 @@
-/netstatus/webapp/airsci_netstatus/README.txt
